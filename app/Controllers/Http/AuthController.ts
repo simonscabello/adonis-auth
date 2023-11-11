@@ -28,7 +28,7 @@ export default class AuthController {
 
     const token = await auth.use('api').attempt(email, password)
 
-    await this.tokenService.create(token, user.id)
+    await this.tokenService.create(token)
 
     return response.ok(user.user)
   }
