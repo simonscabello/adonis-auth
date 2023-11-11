@@ -21,10 +21,7 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.group(() => {
-  Route.post('/users', 'UsersController.store')
-    .as('users.store')
-  Route.get('/users/:id/profile', 'UsersController.show')
-    .as('users.show')
+  Route.post('/users', 'UsersController.store').as('users.store')
+  Route.get('/users/:id/profile', 'UsersController.show').as('users.show')
   Route.post('/login', 'AuthController.login')
 }).prefix('api/v1')
-

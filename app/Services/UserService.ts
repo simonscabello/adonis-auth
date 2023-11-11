@@ -16,35 +16,35 @@ export default class UserService {
 
   public async create(request) {
     try {
-      const trx = await Database.beginGlobalTransaction();
+      const trx = await Database.beginGlobalTransaction()
 
-      const userPayload = await request.validate(CreateUserValidator);
-      const user = await User.create(userPayload, trx);
+      const userPayload = await request.validate(CreateUserValidator)
+      const user = await User.create(userPayload, trx)
 
-      let addressPayload = request.input('address');
+      let addressPayload = request.input('address')
 
-      const address = await this.addressService.create(addressPayload, user.id, trx);
+      const address = await this.addressService.create(addressPayload, user.id, trx)
 
-      await trx.commit();
+      await trx.commit()
 
-      return { user };
+      return { user }
     } catch (error) {
-      await Database.rollbackGlobalTransaction();
-      throw error;
+      await Database.rollbackGlobalTransaction()
+      throw error
     }
   }
 
   public async show(request) {
-    const user = await User.find(request.params().id);
+    const user = await User.find(request.params().id)
 
-    const address = await this.addressService.getByUserId(user.id);
+    const address = await this.addressService.getByUserId(user.id)
 
     let tokenFromHeader = request.headers().token
 
-    const token = await this.tokenService.getByUserId(user.id, tokenFromHeader);
+    const token = await this.tokenService.getByUserId(user.id, tokenFromHeader)
 
     if (!token) {
-      return null;
+      return null
     }
 
     return {
@@ -58,9 +58,9 @@ export default class UserService {
           city: address.city,
           state: address.state,
           country: address.country,
-        };
+        }
       }),
-    };
+    }
   }
 
   public async findByEmail(email) {
@@ -70,7 +70,7 @@ export default class UserService {
       return null
     }
 
-    const address = await this.addressService.getByUserId(user.id);
+    const address = await this.addressService.getByUserId(user.id)
 
     return {
       user: {
@@ -84,11 +84,11 @@ export default class UserService {
             city: address.city,
             state: address.state,
             country: address.country,
-          };
+          }
         }),
       },
-      password: user.password
-    };
+      password: user.password,
+    }
   }
 
   public async updateLastLogin(userId) {

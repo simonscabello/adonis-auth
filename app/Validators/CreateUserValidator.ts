@@ -6,50 +6,17 @@ export default class CreateUserValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    name: schema.string({}, [
-      rules.minLength(2),
-      rules.maxLength(64),
-    ]),
-    email: schema.string({}, [
-      rules.email(),
-      rules.unique({ table: 'users', column: 'email' }),
-    ]),
-    password: schema.string({}, [
-      rules.minLength(8),
-      rules.maxLength(64),
-    ]),
+    name: schema.string({}, [rules.minLength(2), rules.maxLength(64)]),
+    email: schema.string({}, [rules.email(), rules.unique({ table: 'users', column: 'email' })]),
+    password: schema.string({}, [rules.minLength(8), rules.maxLength(64)]),
     address: schema.array().members(
       schema.object().members({
-        street: schema.string({}, [
-          rules.required(),
-          rules.minLength(2),
-          rules.maxLength(64),
-        ]),
-        city: schema.string({}, [
-          rules.required(),
-          rules.minLength(2),
-          rules.maxLength(64),
-        ]),
-        state: schema.string({}, [
-          rules.required(),
-          rules.minLength(2),
-          rules.maxLength(64),
-        ]),
-        district: schema.string({}, [
-          rules.required(),
-          rules.minLength(2),
-          rules.maxLength(64),
-        ]),
-        number: schema.string({}, [
-          rules.required(),
-          rules.minLength(2),
-          rules.maxLength(64),
-        ]),
-        country: schema.string({}, [
-          rules.required(),
-          rules.minLength(2),
-          rules.maxLength(64),
-        ]),
+        street: schema.string({}, [rules.required(), rules.minLength(2), rules.maxLength(64)]),
+        city: schema.string({}, [rules.required(), rules.minLength(2), rules.maxLength(64)]),
+        state: schema.string({}, [rules.required(), rules.minLength(2), rules.maxLength(64)]),
+        district: schema.string({}, [rules.required(), rules.minLength(2), rules.maxLength(64)]),
+        number: schema.string({}, [rules.required(), rules.minLength(2), rules.maxLength(64)]),
+        country: schema.string({}, [rules.required(), rules.minLength(2), rules.maxLength(64)]),
       })
     ),
   })

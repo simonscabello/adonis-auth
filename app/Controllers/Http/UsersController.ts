@@ -11,33 +11,33 @@ export default class UsersController {
     this.tokenService = new TokenService()
   }
 
-  public async store ({ auth, request, response }: HttpContextContract) {
+  public async store({ auth, request, response }: HttpContextContract) {
     const payload = await this.userService.create(request)
 
     const token = await auth.use('api').generate(payload.user)
 
     const tokenPayload = {
-      'name': 'api',
-      'type': 'api',
-      'user_id': payload.user.id,
-      'token': token.token,
-      'expires_at': token.expiresAt,
+      name: 'api',
+      type: 'api',
+      user_id: payload.user.id,
+      token: token.token,
+      expires_at: token.expiresAt,
     }
 
     await this.tokenService.create(tokenPayload)
 
     let user = {
-      'id': payload.user.id,
-      'created': payload.user.createdAt,
-      'modified': payload.user.updatedAt,
-      'last_login': payload.user.lastLogin,
-      'token': token.token,
+      id: payload.user.id,
+      created: payload.user.createdAt,
+      modified: payload.user.updatedAt,
+      last_login: payload.user.lastLogin,
+      token: token.token,
     }
 
     return response.created(user)
   }
 
-  public async show ({ request, response }: HttpContextContract) {
+  public async show({ request, response }: HttpContextContract) {
     if (!request.headers().token) {
       return response.unauthorized()
     }

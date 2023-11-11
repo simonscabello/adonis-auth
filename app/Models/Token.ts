@@ -1,31 +1,31 @@
 import { BaseModel, belongsTo, BelongsTo, column } from '@ioc:Adonis/Lucid/Orm'
-import { DateTime } from 'luxon';
-import User from 'App/Models/User';
+import { DateTime } from 'luxon'
+import User from 'App/Models/User'
 
 export default class Token extends BaseModel {
-  public static table = 'api_tokens';
+  public static table = 'api_tokens'
 
   @column({ isPrimary: true })
-  public id: number;
+  public id: number
 
   @column()
-  public userId: number;
+  public userId: number
 
   @column()
-  public name: string;
+  public name: string
 
   @column()
-  public type: string;
+  public type: string
 
   @column()
-  public token: string;
+  public token: string
 
   @column.dateTime()
-  public expiresAt: DateTime;
+  public expiresAt: DateTime
 
   @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime;
+  public createdAt: DateTime
 
   @belongsTo(() => User)
-  public user: BelongsTo<typeof User>;
+  public user: BelongsTo<typeof User>
 }
