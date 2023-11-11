@@ -1,7 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import UserService from 'App/Services/UserService'
 import TokenService from 'App/Services/TokenService'
-import * as console from 'console'
 
 export default class UsersController {
   protected userService: UserService
