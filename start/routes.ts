@@ -20,6 +20,10 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
+Route.get('/', async () => {
+  return { health: 'ok' }
+})
+
 Route.group(() => {
   Route.post('/users', 'UsersController.store').as('users.store')
   Route.get('/users/:id/profile', 'UsersController.show').as('users.show')
