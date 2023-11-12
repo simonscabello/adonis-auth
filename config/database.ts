@@ -6,7 +6,6 @@
  */
 
 import Env from '@ioc:Adonis/Core/Env'
-import Application from '@ioc:Adonis/Core/Application'
 import type { DatabaseConfig } from '@ioc:Adonis/Lucid/Database'
 
 const databaseConfig: DatabaseConfig = {
@@ -23,6 +22,17 @@ const databaseConfig: DatabaseConfig = {
   connection: Env.get('DB_CONNECTION'),
 
   connections: {
+    /*
+    |--------------------------------------------------------------------------
+    | PostgreSQL config
+    |--------------------------------------------------------------------------
+    |
+    | Configuration for PostgreSQL database. Make sure to install the driver
+    | from npm when using this connection
+    |
+    | npm i pg
+    |
+    */
     pg: {
       client: 'pg',
       connection: {
@@ -38,6 +48,7 @@ const databaseConfig: DatabaseConfig = {
       healthCheck: false,
       debug: false,
     },
+
   }
 }
 
