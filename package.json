@@ -6,9 +6,6 @@
     "dev": "node ace serve --watch",
     "build": "node ace build",
     "start": "ENV_SILENT=true node server.js",
-    "test": "node ace test",
-    "lint": "eslint . --ext=.ts",
-    "format": "prettier --write ."
   },
   "engines": {
     "node": "20.9.0"
