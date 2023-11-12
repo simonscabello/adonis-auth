@@ -16,6 +16,10 @@ export default class AuthController {
     const email = request.input('email')
     const password = request.input('password')
 
+    if(!email || !password) {
+      return response.status(400).json({ message: 'Usuário e/ou senha inválidos' })
+    }
+
     let user = await this.userService.findByEmail(email)
     if (!user || !user.user) {
       return response.status(404).json({ message: 'Usuário e/ou senha inválidos' })

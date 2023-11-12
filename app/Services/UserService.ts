@@ -37,6 +37,10 @@ export default class UserService {
   public async show(request) {
     const user = await User.find(request.params().id)
 
+    if (!user) {
+      return { error: 'User not found', status: 404}
+    }
+
     const address = await this.addressService.getByUserId(user.id)
 
     let tokenFromHeader = request.headers().token
@@ -44,7 +48,7 @@ export default class UserService {
     const token = await this.tokenService.getByUserId(user.id, tokenFromHeader)
 
     if (!token) {
-      return null
+      return { error: 'Unauthorized', status: 401}
     }
 
     return {

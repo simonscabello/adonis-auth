@@ -44,7 +44,10 @@ export default class UsersController {
 
     const payload = await this.userService.show(request)
 
-    if (!payload) {
+    if (payload?.status === 404) {
+      return response.notFound()
+    }
+    if (payload?.status === 401) {
       return response.unauthorized()
     }
 
